@@ -1,5 +1,5 @@
 # Bước 1: Sử dụng image Tomcat chính thức
-FROM tomcat:9.0-jdk17
+FROM tomcat:9.0-jdk21
 
 # Bước 2: Xoá webapps mặc định
 RUN rm -rf /usr/local/tomcat/webapps/*
