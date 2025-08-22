@@ -4,7 +4,7 @@ FROM tomcat:9.0-jdk17
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy file WAR của bạn vào Tomcat (đặt tên ROOT.war để truy cập trực tiếp /)
-COPY EmailList.war /usr/local/tomcat/webapps/ROOT.war
+COPY EmailList.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
