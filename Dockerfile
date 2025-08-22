@@ -1,11 +1,13 @@
-FROM tomcat:9.0-jdk17
+# Dùng image Tomcat chính thức
+FROM tomcat:9.0.108-jdk17
 
-# Xóa ứng dụng mặc định
+# Xoá các app mặc định của Tomcat (nếu muốn sạch)
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy file WAR của bạn vào Tomcat (đặt tên ROOT.war để truy cập trực tiếp /)
-COPY EmailList.war /usr/local/tomcat/webapps/
+# Copy WAR của bạn vào với tên ROOT.war
+COPY EmailList.war /usr/local/tomcat/webapps/ROOT.war
 
+# Mặc định Tomcat chạy ở cổng 8080
 EXPOSE 8080
 
 CMD ["catalina.sh", "run"]
