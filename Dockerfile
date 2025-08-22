@@ -1,15 +1,20 @@
-# Bước 1: Sử dụng image Tomcat chính thức
-FROM tomcat:9.0-jdk21
+FROM openjdk:21-jdk-slim AS base
 
-# Bước 2: Xoá webapps mặc định
+# Cài wget + tar
+RUN apt-get update && apt-get install -y wget tar && rm -rf /var/lib/apt/lists/*
+
+# Cài Tomcat 10.1.44
+RUN wget https://downloads.apache.org/tomcat/tomcat-9/v9.1.108/bin/apache-tomcat-9.1.108.tar.gz \
+    && tar xzf apache-tomcat-9.1.108.tar.gz \
+    && mv apache-tomcat-9.1.108 /usr/local/tomcat \
+    && rm apache-tomcat-9.1.108.tar.gz
+
+ENV CATALINA_HOME=/usr/local/tomcat
+ENV PATH="$CATALINA_HOME/bin:$PATH"
+
+# Copy war vào Tomcat
 RUN rm -rf /usr/local/tomcat/webapps/*
-
-# Bước 3: Copy file WAR vào Tomcat
-# Giả sử file WAR của bạn tên là webmoi.war và nằm cùng thư mục với Dockerfile
 COPY EmailList.war /usr/local/tomcat/webapps/ROOT.war
 
-# Bước 4: Expose port 8080
 EXPOSE 8080
-
-# Bước 5: Chạy Tomcat
 CMD ["catalina.sh", "run"]
