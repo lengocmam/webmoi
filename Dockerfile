@@ -1,5 +1,5 @@
 # Dùng image Tomcat chính thức
-FROM tomcat:9.0.108-jdk17
+FROM tomcat:9.0.108-jdk21
 
 # Xoá các app mặc định của Tomcat (nếu muốn sạch)
 RUN rm -rf /usr/local/tomcat/webapps/*
